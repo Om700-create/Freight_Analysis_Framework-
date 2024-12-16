@@ -1,0 +1,48 @@
+# List of Python dependencies
+# Data manipulation and analysis
+pandas
+numpy
+
+# Data visualization
+matplotlib
+seaborn
+plotly
+
+# Machine learning
+scikit-learn
+xgboost
+lightgbm
+
+# Hyperparameter tuning
+optuna
+
+# Deployment
+streamlit
+flask
+
+# Data processing and utilities
+pyyaml
+joblib
+
+# Notebook support
+jupyterlab
+ipython
+
+# Testing and debugging
+pytest
+pytest-cov
+
+# Logging
+loguru
+
+# Dashboard (optional)
+dash
+
+# Geospatial libraries (optional, if you want map visualizations)
+geopandas
+shapely
+
+# Environment
+python-dotenv
+
+-e .

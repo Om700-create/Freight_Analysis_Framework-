@@ -1,0 +1,3 @@
+name: freight_analysis_env
+channels:
+  - defaults

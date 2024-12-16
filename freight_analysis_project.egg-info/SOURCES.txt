@@ -1,0 +1,17 @@
+LICENSE
+README.md
+setup.py
+freight_analysis_project.egg-info/PKG-INFO
+freight_analysis_project.egg-info/SOURCES.txt
+freight_analysis_project.egg-info/dependency_links.txt
+freight_analysis_project.egg-info/requires.txt
+freight_analysis_project.egg-info/top_level.txt
+src/__init__.py
+src/data_preprocessing.py
+src/feature_engineering.py
+src/model_training.py
+src/utils.py
+src/visualization.py
+tests/test_data_preprocessing.py
+tests/test_feature_engineering.py
+tests/test_model.py

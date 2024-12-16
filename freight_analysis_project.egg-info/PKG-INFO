@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: freight_analysis_project
+Version: 0.1.0
+Summary: A package for predicting stroke occurrences using advanced machine learning techniques.
+Home-page: https://github.com/yourusername/freight_analysis_project
+Author: Omkar
+Author-email: om.data07@gmail.com
+License: MIT
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Programming Language :: Python :: 3.8
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.7
+License-File: LICENSE
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
+Requires-Dist: plotly
+Requires-Dist: scikit-learn
+Requires-Dist: xgboost
+Requires-Dist: lightgbm
+Requires-Dist: optuna
+Requires-Dist: streamlit
+Requires-Dist: flask
+Requires-Dist: pyyaml
+Requires-Dist: joblib
+Requires-Dist: jupyterlab
+Requires-Dist: ipython
+Requires-Dist: pytest
+Requires-Dist: pytest-cov
+Requires-Dist: loguru
+Requires-Dist: dash
+Requires-Dist: geopandas
+Requires-Dist: shapely
+Requires-Dist: python-dotenv
