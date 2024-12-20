@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    {% if logged_in %}
+    <div id="actual-vs-predicted"></div>
+    <div id="residuals"></div>
+
+    <script>
+        // Access actual and predicted data from Jinja templates
+        var actualData = JSON.parse('{{ actual_data }}');
+        var predictedData = JSON.parse('{{ predicted_data }}');
+
+        // Create plotly visualizations using actualData and predictedData
+
+        var actualVsPredicted = plot_actual_vs_predicted(actualData, predictedData);
+        Plotly.newPlot('actual-vs-predicted', actualVsPredicted);
+
+        var residuals = plot_residuals(actualData, predictedData);
+        Plotly.newPlot('residuals', residuals);
+    </script>
+    {% else %}
+    <p>You are not logged in. Please <a href="{{ url_for('login') }}">login</a> to view the dashboard.</p>
+    {% endif %}
+</body>
+</html>
