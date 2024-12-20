@@ -1,4 +1,5 @@
-# Python script
+# scripts/run_dashboard.py
+
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output
@@ -11,7 +12,6 @@ processed_data_path = "C:/project/Freight_Analysis_Framework-/data/processed/fre
 predictions_path = "C:/project/Freight_Analysis_Framework-/models/predictions.csv"
 
 # Load data
-data = read_csv(processed_data_path)
 predictions = read_csv(predictions_path)
 
 # Extract actual and predicted values

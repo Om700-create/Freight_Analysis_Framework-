@@ -1,4 +1,5 @@
-# Python script
+# src/visualization.py
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -7,11 +8,11 @@ import os
 def plot_actual_vs_predicted(y_test, y_pred):
     """
     Create a scatter plot comparing actual vs. predicted values.
-    
+
     Args:
         y_test (pd.Series): Actual target values.
         y_pred (pd.Series): Predicted target values.
-        
+
     Returns:
         fig: Plotly figure object.
     """
@@ -26,11 +27,11 @@ def plot_actual_vs_predicted(y_test, y_pred):
 def plot_residuals(y_test, y_pred):
     """
     Create a residual plot.
-    
+
     Args:
         y_test (pd.Series): Actual target values.
         y_pred (pd.Series): Predicted target values.
-        
+
     Returns:
         fig: Plotly figure object.
     """
@@ -44,7 +45,7 @@ def plot_residuals(y_test, y_pred):
 def save_visualization(fig, file_path):
     """
     Save the visualization to a file.
-    
+
     Args:
         fig (go.Figure): Plotly figure object.
         file_path (str): File path to save the visualization.

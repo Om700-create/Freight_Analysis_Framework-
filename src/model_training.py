@@ -1,3 +1,5 @@
+# src/model_training.py
+
 import os
 import pandas as pd
 import logging
@@ -47,6 +49,13 @@ def train_linear_regression(data_path, model_output_path):
     # Step 5: Save the trained model
     logging.info(f"Saving the trained Linear Regression model to {model_output_path}")
     save_object(lr_model, model_output_path)
+
+    # Step 6: Make predictions on the test set
+    logging.info("Making predictions on the test set.")
+    predictions = pd.DataFrame({'Actual': y_test, 'Predicted': y_pred})
+    predictions_path = os.path.join(os.path.dirname(model_output_path), 'predictions.csv') 
+    predictions.to_csv(predictions_path, index=False)
+    logging.info(f"Predictions saved to {predictions_path}")
 
 
 if __name__ == "__main__":

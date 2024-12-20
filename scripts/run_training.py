@@ -1,3 +1,5 @@
+# scripts/run_training.py
+
 import logging
 from src.model_training import train_linear_regression
 from src.utils import setup_logging
@@ -20,4 +22,3 @@ if __name__ == "__main__":
     except Exception as e:
         logging.error(f"Error during model training: {e}")
         print(f"Error: {e}")
-
