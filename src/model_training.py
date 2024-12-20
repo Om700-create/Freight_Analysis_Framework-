@@ -56,4 +56,3 @@ if __name__ == "__main__":
 
     # Call the train_linear_regression function
     train_linear_regression(feature_engineered_data_path, model_output_path)
-
