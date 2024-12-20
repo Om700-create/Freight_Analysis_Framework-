@@ -1,66 +1,54 @@
-from flask import Flask, render_template, request, session, redirect, url_for
-from src.visualization import plot_actual_vs_predicted, plot_residuals
-from src.utils import read_csv
+from flask import Flask, render_template, request
+import pandas as pd
+from src.utils import load_model
 
-# Define file paths
-processed_data_path = "C:/project/Freight_Analysis_Framework-/data/processed/freight_analysis_feature_engineered.csv"
-predictions_path = "C:/project/Freight_Analysis_Framework-/models/predictions.csv"
-
-# Load data (assuming predictions.csv exists)
-predictions = read_csv(predictions_path)
-
-# Extract actual and predicted values
-y_test = predictions['Actual']
-y_pred = predictions['Predicted']
-
-# Initialize the Flask app
 app = Flask(__name__)
 
-# Secret key for session management (replace with a strong random string)
-app.config['SECRET_KEY'] = 'your_secret_key'
+# Load the trained model
+model = load_model('models/lr_model.pkl')  # Ensure the path is correct
 
-# Login credentials (replace with actual username and password)
-USERS = {'admin': 'password123'}
-
-def login_required(func):
-    """Decorator to check if user is logged in"""
-    def wrapper(*args, **kwargs):
-        if not session.get('logged_in'):
-            return redirect(url_for('login'))
-        return func(*args, **kwargs)
-    return wrapper
+# Predefined feature columns based on your model
+feature_columns = [
+    'Log_Freight_Value_2012',
+    'Log_Freight_Volume_2012',
+    'Log_Volume_Value_Interaction_2012',
+    'Value_Category_2012_Low',
+    'Value_Growth_2012_2013'
+]
 
 @app.route('/')
-@login_required
-def index():
-    """Render the main dashboard page"""
-    return render_template('index.html', title="Freight Analysis Dashboard",
-                            actual_data=y_test.to_json(), predicted_data=y_pred.to_json())
+def home():
+    return render_template('index.html')
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    """Handle login requests"""
+@app.route('/predict', methods=['GET', 'POST'])
+def predict():
+    prediction = None
+
     if request.method == 'POST':
-        username = request.form.get('username')
-        password = request.form.get('password')
+        # Retrieve the form data
+        feature1 = float(request.form.get('feature1'))
+        feature2 = float(request.form.get('feature2'))
 
-        if username and password:  # Check if both username and password are provided
-            if username in USERS and USERS[username] == password:
-                session['logged_in'] = True
-                return redirect(url_for('index'))  # Assuming 'index' is decorated
-            else:
-                error = 'Invalid username or password'
-        else:
-            error = 'Please enter both username and password.'
-    else:
-        error = None
-    return render_template('login.html', title='Login', error=error)
+        # Construct the input DataFrame
+        input_data = pd.DataFrame([{
+            'Log_Freight_Value_2012': feature1,
+            'Log_Freight_Volume_2012': feature2,
+            'Log_Volume_Value_Interaction_2012': feature1 * feature2,
+            'Value_Category_2012_Low': 1 if feature1 < 0.5 else 0,
+            'Value_Growth_2012_2013': feature2 * 1.02  # Example logic
+        }])
 
-@app.route('/logout')
-def logout():
-    """Log out the user"""
-    session.pop('logged_in', None)
-    return redirect(url_for('login'))
+        # Make predictions
+        try:
+            prediction = model.predict(input_data)[0]  # Get the first value of prediction
+        except Exception as e:
+            prediction = f"Error: {e}"
+
+    return render_template('predict.html', prediction=prediction)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
